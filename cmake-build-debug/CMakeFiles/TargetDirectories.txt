@@ -1,0 +1,3 @@
+/Users/zw/Documents/Otago/COSC440_Advanced OS/cosc440_code/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/zw/Documents/Otago/COSC440_Advanced OS/cosc440_code/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/zw/Documents/Otago/COSC440_Advanced OS/cosc440_code/cmake-build-debug/CMakeFiles/mycat.dir
