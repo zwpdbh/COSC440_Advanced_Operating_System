@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 
     while ((size_read = read(openedFile, buf, size_to_read)) > 0) {
 
-        if (size_read == EINTR) {
+        if (errno == EINTR) {
             continue;
         } else if (size_read < 1) {
             perror("read()");
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
         ssize_t size_written = 0;
 
         while ((size_written_this_time = write(STDOUT_FILENO, &buf[size_written], size_remaining)) < size_remaining) {
-            if (size_written_this_time == EINTR) {
+            if (errno == EINTR) {
                 continue;
             } else if (size_written_this_time < 0) {
                 perror("error during write to STDOUT_FILENO");
