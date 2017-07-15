@@ -31,30 +31,31 @@ int main(int argc, char *argv[]) {
 
     while ((size_read = read(openedFile, buf, size_to_read)) > 0) {
 
-        if (errno == EINTR) {
-            continue;
-        } else if (size_read < 1) {
-            perror("read()");
-            return -1;
+        if (size_read < 1) {
+            if (errno == EINTR) {
+                continue;
+            } else {
+                perror("read()");
+                return -1;
+            }
         }
-
 
         ssize_t size_written_this_time;
         ssize_t size_remaining = size_read;
         ssize_t size_written = 0;
 
         while ((size_written_this_time = write(STDOUT_FILENO, &buf[size_written], size_remaining)) < size_remaining) {
-            if (errno == EINTR) {
-                continue;
-            } else if (size_written_this_time < 0) {
-                perror("error during write to STDOUT_FILENO");
-                return -1;
+            if (size_written_this_time < 0) {
+                if (errno == EINTR) {
+                    continue;
+                } else {
+                    perror("error during write to STDOUT_FILENO");
+                    return -1;
+                }
             } else {
                 size_written += size_written_this_time;
                 size_remaining -= size_written_this_time;
             }
-
         }
-
     }
 }
